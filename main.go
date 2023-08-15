@@ -1,9 +1,10 @@
 package main
 
 import (
-	"music_list/route"
+	"fmt"
 	"music_list/database"
 	"music_list/models"
+	"music_list/route"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -15,12 +16,13 @@ func setupRoutes(app *fiber.App) {
 func main() {
 	db, err := database.ConnectDB()
 	if err != nil {
-        panic(err.Error())
-    }
+		fmt.Println("Error connecting to database")
+		panic(err.Error())
+	}
 	db.AutoMigrate(&models.Music{})
 
 	app := fiber.New()
 	setupRoutes(app)
-	
+
 	app.Listen(":2000")
 }

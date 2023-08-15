@@ -5,6 +5,7 @@ import (
 	"gorm.io/driver/mysql"
 )
 
+var DB *gorm.DB
 
 func ConnectDB() (*gorm.DB, error) {
 	dsn := "izasoerya:Makanmieayam4kali@tcp(localhost:3306)/MUSIC_LIST"

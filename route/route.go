@@ -8,7 +8,6 @@ import (
 
 
 func MusicRoute(route fiber.Router) {
-	route.Get("/home", controller.HomePage)
 	route.Get("/show", controller.ShowList)
 	route.Post("/add", controller.AppendList)
 	route.Put("/edit", controller.EditList)
