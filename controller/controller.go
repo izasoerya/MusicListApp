@@ -9,13 +9,17 @@ import (
 )
 
 func ShowList(c *fiber.Ctx) error {
-	var data []models.Music = make([]models.Music, 0)
+	var musicList []models.Music
+	if err := database.DB.Find(&musicList).Error; err != nil {
+		fmt.Println("Error querying music data")
+		panic(err.Error())
+	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
-		"message": "Hello world",
+		"message": "Success send all data",
 		"data": fiber.Map{
-			"list": data,
+			"list": musicList,
 		},
 	})
 }
@@ -35,23 +39,20 @@ func AppendList(c *fiber.Ctx) error {
 	}
 
 	// Append models to data
-	data := new(models.Music)
-	data.Author = &body.Author
-	data.Title = &body.Title
-	data.Date = &body.Date
-	data.Link = &body.Link
+	list := new(models.Music)
+	list.Title = &body.Title
+	list.Author = &body.Author
+	list.Date = &body.Date
+	list.Link = &body.Link
 
 	// Push to Database
-	result := database.DB.Create(&data)
-	if result != nil {
-		panic(err)
-	}
+	database.DB.Create(&list)
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
 		"message": "Data created successfully",
 		"data": fiber.Map{
-			"data": data,
+			"list": list,
 		},
 	})
 }
