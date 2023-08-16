@@ -6,6 +6,7 @@ import (
 	"music_list/database"
 	"music_list/models"
 	"music_list/route"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -14,6 +15,13 @@ import (
 func setupRoutes(app *fiber.App) {
 	route.MusicRoute(app.Group("/music"))
 	route.AuthRoute(app.Group("/auth"))
+}
+
+func getPort() string {
+	if envPort := os.Getenv("PORT"); envPort != "" {
+		return ":" + envPort
+	}
+	return ":2000"
 }
 
 func main() {
@@ -38,5 +46,5 @@ func main() {
 	app := fiber.New()
 	setupRoutes(app)
 
-	app.Listen(":2000")
+	app.Listen(getPort())
 }
