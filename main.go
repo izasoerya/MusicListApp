@@ -6,7 +6,6 @@ import (
 	"music_list/database"
 	"music_list/models"
 	"music_list/route"
-	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
