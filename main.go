@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	// "log"
 	"music_list/database"
 	"music_list/models"
 	"music_list/route"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	// "github.com/joho/godotenv"
+	"github.com/joho/godotenv"
 )
 
 func setupRoutes(app *fiber.App) {
@@ -24,10 +23,15 @@ func getPort() string {
 	return ":2000"
 }
 
+func loadEnv(){
+	err := godotenv.Load()
+  	if err != nil {
+   	 	panic("Error loading .env file")
+  	}
+}
+
 func main() {
-	// if err := godotenv.Load(); err != nil {
-	// 	log.Fatal("Error loading .env file: ", err)
-	// }
+	// loadEnv()
 	err := database.ConnectDB()
 	if err != nil {
 		fmt.Println("Error connecting to database")
