@@ -13,6 +13,7 @@ import (
 
 func setupRoutes(app *fiber.App) {
 	route.MusicRoute(app.Group("/music"))
+	route.AuthRoute(app.Group("/auth"))
 }
 
 func main() {
@@ -24,7 +25,15 @@ func main() {
 		fmt.Println("Error connecting to database")
 		panic(err.Error())
 	}
-	database.DB.AutoMigrate(&models.Music{})
+
+	if err := database.DB.AutoMigrate(&models.Music{}); err != nil {
+		fmt.Println("Error creating 'music' table")
+		panic(err.Error())
+	}
+	if err := database.DB.AutoMigrate(&models.Auth{}); err != nil {
+		fmt.Println("Error creating 'auth' table")
+		panic(err.Error())
+	}
 
 	app := fiber.New()
 	setupRoutes(app)

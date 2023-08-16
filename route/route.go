@@ -16,5 +16,7 @@ func MusicRoute(route fiber.Router) {
 }
 
 func AuthRoute(route fiber.Router) {
-	route.Post("/create", controller.CreateUser)
+	route.Get("", controller.CheckUser)
+	route.Post("", controller.CreateUser)
+	route.Put("/:id", controller.ChangeUser)
 }
