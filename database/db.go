@@ -10,7 +10,7 @@ import (
 var DB *gorm.DB
 
 func ConnectDB() error {
-	dsn := "izasoerya:Makanmieayam4kali@tcp(localhost:3306)/MUSIC_LIST"
+	dsn := "izasoerya:Makanmieayam4kali@tcp(www.db4free.net:3306)/music_list?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("error initializing database")
