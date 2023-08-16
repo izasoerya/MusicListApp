@@ -18,6 +18,7 @@ func main() {
 		fmt.Println("Error connecting to database")
 		panic(err.Error())
 	}
+	database.DB.AutoMigrate()
 
 	app := fiber.New()
 	setupRoutes(app)
