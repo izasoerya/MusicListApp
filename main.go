@@ -18,7 +18,7 @@ func setupRoutes(app *fiber.App) {
 }
 
 func getPort() string {
-	if envPort := os.Getenv("MY_PORT"); envPort != "" {
+	if envPort := "MY_PORT"; envPort != "" {
 		return ":" + envPort
 	}
 	return ":2000"
