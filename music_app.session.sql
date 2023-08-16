@@ -2,8 +2,8 @@
 DROP TABLE LIST;
 
 -- @block
-INSERT INTO musics (title, author, date, link)
-VALUES ('New Game', 'IDK', '2023-08-15', 'https://example.com');
+ALTER TABLE musics
+ADD ID INTEGER;
 
 -- @block
 SELECT * FROM musics;
