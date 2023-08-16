@@ -8,10 +8,11 @@ import (
 
 
 func MusicRoute(route fiber.Router) {
-	route.Get("/show", controller.ShowList)
-	route.Post("/add", controller.AppendList)
-	route.Put("/edit/:id", controller.EditList)
-	route.Delete("/delete", controller.DeleteList)
+	route.Get("", controller.ShowList)
+	route.Get("/:id", controller.SearchList)
+	route.Post("", controller.AppendList)
+	route.Put("/:id", controller.EditList)
+	route.Delete("/:id", controller.DeleteList)
 }
 
 func AuthRoute(route fiber.Router) {

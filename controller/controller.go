@@ -25,6 +25,24 @@ func ShowList(c *fiber.Ctx) error {
 	})
 }
 
+func SearchList(c *fiber.Ctx) error {
+	paramID := c.Params("id") // id handler
+	ID, err := strconv.Atoi(paramID)
+	if err != nil {
+		panic(err)
+	}
+	var data models.Music
+	database.DB.First(&data, ID)
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"success": true,
+		"message": "Success send all data",
+		"data": fiber.Map{
+			"list": data,
+		},
+	})
+}
+
 func AppendList(c *fiber.Ctx) error {
 	// Parse body input
 	var body models.Request
@@ -68,15 +86,15 @@ func EditList(c *fiber.Ctx) error {
 	// Edit the DB
 	var data models.Music
 	if err := database.DB.Model(&data).Where("id = ?", ID).Updates(models.Music{
-		ID : &body.ID,
+		ID:     &body.ID,
 		Author: &body.Author,
 		Title:  &body.Title,
-		Date: &body.Date,
+		Date:   &body.Date,
 	}).Error; err != nil {
 		fmt.Println("Error updating music data")
 		panic(err.Error())
 	}
-	
+
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
 		"message": "Data edited successfully",
@@ -92,10 +110,13 @@ func DeleteList(c *fiber.Ctx) error {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(ID)
+	if err := database.DB.Where("id = ?", ID).Delete(&models.Music{}).Error; err != nil {
+		fmt.Println("Error deleting music data")
+		panic(err.Error())
+	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
-		"message": "Hello world",
+		"message": "Successfully delete",
 	})
 }
