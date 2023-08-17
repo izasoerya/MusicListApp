@@ -71,7 +71,7 @@ func AppendList(c *fiber.Ctx) error {
 	list.Author = &body.Author
 	list.Date = &body.Date
 	list.Link = &body.Link
-	list.CategoryID = body.CategoryID
+	list.CategoryID = &body.CategoryID
 
 	// Push to Database
 	database.DB.Create(&list)

@@ -1,22 +1,22 @@
 package models
 
 type Request struct {
-	ID     uint32 `json:"id"`
-	Title  string `json:"title"`
-	Author string `json:"author"`
-	Date   string `json:"date"`
-	Link   string `json:"link"`
-	CategoryID *string   // Foreign key column
+	ID         uint32  `json:"id"`
+	Title      string  `json:"title"`
+	Author     string  `json:"author"`
+	Date       string  `json:"date"`
+	Link       string  `json:"link"`
+	CategoryID string // Foreign key column
 
 }
 
 type Music struct {
-	ID     *uint32 `json:"id"`
-	Title  *string `json:"title"`
-	Author *string `json:"author"`
-	Date   *string `json:"date"`
-	Link   *string `json:"link"`
-	CategoryID *string `json:"catalog"`  // Foreign key column
+	ID         *uint32 `json:"id"`
+	Title      *string `json:"title"`
+	Author     *string `json:"author"`
+	Date       *string `json:"date"`
+	Link       *string `json:"link"`
+	CategoryID *string `json:"catalog"` // Foreign key column
 }
 
 type Auth struct {
