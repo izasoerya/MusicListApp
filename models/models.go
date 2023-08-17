@@ -6,6 +6,8 @@ type Request struct {
 	Author string `json:"author"`
 	Date   string `json:"date"`
 	Link   string `json:"link"`
+	CategoryID *string   // Foreign key column
+
 }
 
 type Music struct {
@@ -14,6 +16,7 @@ type Music struct {
 	Author *string `json:"author"`
 	Date   *string `json:"date"`
 	Link   *string `json:"link"`
+	CategoryID *string   // Foreign key column
 }
 
 type Auth struct {

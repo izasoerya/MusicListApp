@@ -38,12 +38,8 @@ func main() {
 		panic(err.Error())
 	}
 
-	if err := database.DB.AutoMigrate(&models.Music{}); err != nil {
-		fmt.Println("Error creating 'music' table")
-		panic(err.Error())
-	}
-	if err := database.DB.AutoMigrate(&models.Auth{}); err != nil {
-		fmt.Println("Error creating 'auth' table")
+	if err := database.DB.AutoMigrate(&models.Music{}, &models.Auth{}); err != nil {
+		fmt.Println("Error automigrate table")
 		panic(err.Error())
 	}
 
