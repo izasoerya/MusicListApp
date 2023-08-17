@@ -6,7 +6,7 @@ type Request struct {
 	Author     string  `json:"author"`
 	Date       string  `json:"date"`
 	Link       string  `json:"link"`
-	CategoryID string // Foreign key column
+	CategoryID string  `json:"catalog"` // Foreign key column
 
 }
 

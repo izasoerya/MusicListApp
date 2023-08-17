@@ -56,7 +56,6 @@ func SearchList(c *fiber.Ctx) error {
 	})
 }
 
-
 func AppendList(c *fiber.Ctx) error {
 	// Parse body input
 	var body models.Request
