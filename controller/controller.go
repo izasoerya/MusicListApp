@@ -99,11 +99,12 @@ func EditList(c *fiber.Ctx) error {
 
 	// Edit the DB
 	var data models.Music
-	if err := database.DB.Model(&data).Where("id = ?", ID).Updates(models.Music{
+	if err := database.DB.Model(&data).Where("id = ? AND category_id = ?", ID, body.CategoryID).Updates(models.Music{
 		ID:     &body.ID,
 		Author: &body.Author,
 		Title:  &body.Title,
 		Date:   &body.Date,
+		Link:   &body.Link,
 	}).Error; err != nil {
 		fmt.Println("Error updating music data")
 		panic(err.Error())
@@ -124,7 +125,11 @@ func DeleteList(c *fiber.Ctx) error {
 	if err != nil {
 		panic(err)
 	}
-	if err := database.DB.Where("id = ?", ID).Delete(&models.Music{}).Error; err != nil {
+	var body models.Request // body handler
+	if err := c.BodyParser(&body); err != nil {
+		panic(err)
+	}
+	if err := database.DB.Where("id = ? AND category_id = ?", ID, body.CategoryID).Delete(&models.Music{}).Error; err != nil {
 		fmt.Println("Error deleting music data")
 		panic(err.Error())
 	}
